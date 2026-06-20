@@ -1,0 +1,25 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Subscribe from '../components/Subscribe.astro';
+---
+
+<BaseLayout title="关于 · 心智边界" active="about">
+  <div class="page-head">
+    <div>
+      <div style="display:flex; align-items:baseline; gap:14px; flex-wrap:wrap;">
+        <h1 class="page-title">关于</h1>
+        <span class="page-en">/ ABOUT</span>
+      </div>
+      <div class="page-sub">一个人的三条写作线：语言、故事，与机器。</div>
+    </div>
+  </div>
+
+  <div class="prose" style="max-width:720px;">
+    <p>你好，我是 Justin。这个小站记录我的德语学习、写作，以及我使用 AI 的体验。</p>
+    <p>它本身也是我用来练习编程、练习和 AI 协作的项目 —— 每一步我都要先弄懂“为什么”，再让 AI 动手。</p>
+    <h2>三条线</h2>
+    <p><strong>德语</strong>：在柏林学德语路上的语法笔记。<strong>写作</strong>：我写的故事与半成品。<strong>AI</strong>：把 AI 当工具、当对手、也当一面镜子的实践与思考。</p>
+  </div>
+
+  <Subscribe />
+</BaseLayout>

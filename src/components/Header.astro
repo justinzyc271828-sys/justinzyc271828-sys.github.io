@@ -1,0 +1,24 @@
+---
+// 顶部导航：logo + 胶囊导航。active 决定哪一项高亮。
+const { active = '' } = Astro.props;
+const links = [
+  { key: 'home', label: '首页', href: '/' },
+  { key: 'de', label: '德语', href: '/de' },
+  { key: 'fiction', label: '写作', href: '/fiction' },
+  { key: 'ai', label: 'AI', href: '/ai' },
+  { key: 'about', label: '关于', href: '/about' },
+];
+---
+
+<header class="site-nav">
+  <a href="/" class="logo">
+    <span class="logo-badge">心</span>
+    <span class="logo-name">心智边界</span>
+    <span class="logo-sub">/ notes&amp;machine</span>
+  </a>
+  <nav class="nav-pills">
+    {links.map((l) => (
+      <a href={l.href} class={l.key === active ? 'nav-pill active' : 'nav-pill'}>{l.label}</a>
+    ))}
+  </nav>
+</header>

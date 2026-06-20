@@ -1,0 +1,55 @@
+---
+// 列表页主体：页头 + 置顶(最新) + 文章行。三个板块共用一套（DRY）。
+import { theme, readingTime, ym } from '../lib/themes.js';
+const { sectionKey, title, subtitle, posts } = Astro.props;
+const t = theme(sectionKey);
+const sorted = [...posts].sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const featured = sorted[0];
+const rest = sorted.slice(1);
+---
+
+<div class="page-head">
+  <div>
+    <div style="display:flex; align-items:baseline; gap:14px; flex-wrap:wrap;">
+      <h1 class="page-title">{title}</h1>
+      <span class="page-en">/ ARCHIVE</span>
+    </div>
+    {subtitle && <div class="page-sub">{subtitle}</div>}
+  </div>
+  <div class="page-count">共 {posts.length} 篇</div>
+</div>
+
+{featured && (
+  <a class="featured" href={`/${sectionKey}/${featured.id}`}>
+    <div class="glow"></div>
+    <span class="bracket tl"></span><span class="bracket br"></span>
+    <div style="position:relative;">
+      <div class="featured-tag"><span style={`width:8px;height:8px;border-radius:50%;background:${t.dot};`}></span>置顶 · FEATURED</div>
+      <div class="title">{featured.data.title}</div>
+      {featured.data.summary && <div class="sub">{featured.data.summary}</div>}
+      <div class="read">{readingTime(featured.body)} MIN 阅读 →</div>
+    </div>
+    <div class="cutout" style="min-height:180px;">
+      <span class="sprout"></span>
+      <span class="dash"></span>
+    </div>
+  </a>
+)}
+
+<div class="archive-list">
+  {rest.map((p) => (
+    <a class="archive-row" href={`/${sectionKey}/${p.id}`}>
+      <div style="display:flex; flex-direction:column; gap:9px;">
+        <span class="tag" style={`align-self:flex-start; color:${t.tagText}; background:${t.tagBg};`}><span class="dot" style={`background:${t.dot};`}></span>{t.label}</span>
+        <span class="when">{ym(p.data.date)}</span>
+      </div>
+      <div>
+        <div class="t">{p.data.title}</div>
+        {p.data.summary && <div class="d">{p.data.summary}</div>}
+      </div>
+      <div class="min">{readingTime(p.body)} MIN</div>
+    </a>
+  ))}
+</div>
+
+{posts.length === 0 && <div class="empty">这个栏目暂时还没有文章。</div>}

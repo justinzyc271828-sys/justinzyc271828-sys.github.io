@@ -1,0 +1,111 @@
+---
+// 首页：Hero（最新置顶）+ 三条写作线 + 最新文章 + 订阅。全部接真实数据。
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Subscribe from '../components/Subscribe.astro';
+import { theme, readingTime, ym } from '../lib/themes.js';
+
+const sectionMeta = {
+  de:      { name: '德语语法笔记', desc: '我的德语学习与语法整理。把第二虚拟式、四个格这些拦路虎，一个个拆开。', badgeBg: 'linear-gradient(150deg,#bfe592,#86c46c)', badgeColor: '#23341a', glow: 'rgba(150,210,110,0.18)', icon: 'DE' },
+  fiction: { name: '小说 / 写作',  desc: '我写的故事与文字。半成品、废稿与偶尔成形的短篇，都留在这里。',     badgeBg: 'linear-gradient(150deg,#e8d6a0,#cbb072)', badgeColor: '#3a3015', glow: 'rgba(220,195,120,0.18)', icon: '写' },
+  ai:      { name: 'AI 使用体验',  desc: '我用 AI 的实践与思考。把它当工具、当对手、也当一面镜子。',         badgeBg: 'linear-gradient(150deg,#9fdcc9,#6cbfb0)', badgeColor: '#16332c', glow: 'rgba(120,200,185,0.18)', icon: 'AI' },
+};
+
+const load = async (key) => (await getCollection(key)).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const byKey = { de: await load('de'), fiction: await load('fiction'), ai: await load('ai') };
+const all = [...byKey.de, ...byKey.fiction, ...byKey.ai].sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const featured = all[0];
+const recent = all.slice(0, 6);
+---
+
+<BaseLayout title="心智边界 · 首页" active="home">
+
+  {featured && (
+    <section class="hero">
+      <div class="hero-glow1"></div>
+      <div class="hero-glow2"></div>
+      <span class="bracket tl"></span><span class="bracket tr"></span>
+      <span class="bracket bl"></span><span class="bracket br"></span>
+      <div class="hero-mark">M&amp;</div>
+      <div class="hero-inner">
+        <div class="hero-meta">
+          <span class="hero-featured"><span class="ring"></span>FEATURED</span>
+          <span class="hero-sep"></span>
+          <span class="hero-cat">{theme(featured.collection).label} · {ym(featured.data.date)}</span>
+        </div>
+        <div class="hero-grid">
+          <div>
+            <a class="hero-title" style="display:block;" href={`/${featured.collection}/${featured.id}`}>{featured.data.title}</a>
+            {featured.data.summary && <div class="hero-sub">{featured.data.summary}</div>}
+            <div class="hero-cta">
+              <a class="btn-read" href={`/${featured.collection}/${featured.id}`}>开始阅读 <span style="font-family:var(--mono);">→</span></a>
+              <span class="hero-readmin">{readingTime(featured.body)} MIN · {theme(featured.collection).label}</span>
+            </div>
+          </div>
+          <div class="hero-cutout">
+            <div class="cutout">
+              <span class="sprout"></span>
+              <span class="dash"></span>
+              <span class="cap">FIG.01 / 镂空</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <div class="sec-head">
+    <span class="sec-num">01</span>
+    <span class="sec-title">三条写作线</span>
+    <span class="sec-en">/ THREE THREADS</span>
+    <span class="sec-rule"></span>
+  </div>
+
+  <div class="theme-cards">
+    {['de', 'fiction', 'ai'].map((key) => {
+      const m = sectionMeta[key];
+      const list = byKey[key];
+      const latest = list[0];
+      return (
+        <a class="theme-card" href={`/${key}`}>
+          <div class="glow" style={`background:radial-gradient(circle, ${m.glow}, transparent 70%);`}></div>
+          <div class="top">
+            <span class="theme-badge" style={`background:${m.badgeBg}; color:${m.badgeColor};`}>{m.icon}</span>
+            <span class="theme-count">{list.length} 篇</span>
+          </div>
+          <div class="theme-name">{m.name}</div>
+          <div class="theme-desc">{m.desc}</div>
+          <div class="theme-foot">
+            <span>{latest ? '最新 · ' + latest.data.title : '敬请期待'}</span><span>→</span>
+          </div>
+        </a>
+      );
+    })}
+  </div>
+
+  <div class="sec-head">
+    <span class="sec-num">02</span>
+    <span class="sec-title">最新文章</span>
+    <span class="sec-en">/ LATEST</span>
+    <span class="sec-rule"></span>
+  </div>
+
+  <div class="latest-grid">
+    {recent.map((p) => {
+      const t = theme(p.collection);
+      return (
+        <a class="latest-row" href={`/${p.collection}/${p.id}`}>
+          <span class="tag" style={`color:${t.tagText}; background:${t.tagBg};`}>{t.label}</span>
+          <div class="body">
+            <div class="t">{p.data.title}</div>
+            {p.data.summary && <div class="d">{p.data.summary}</div>}
+          </div>
+          <span class="minutes">{readingTime(p.body)} MIN</span>
+        </a>
+      );
+    })}
+  </div>
+
+  <Subscribe />
+</BaseLayout>

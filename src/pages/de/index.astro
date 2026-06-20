@@ -1,0 +1,12 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SectionArchive from '../../components/SectionArchive.astro';
+import Subscribe from '../../components/Subscribe.astro';
+const posts = await getCollection('de');
+---
+
+<BaseLayout title="德语语法笔记 · 心智边界" active="de">
+  <SectionArchive sectionKey="de" title="德语语法笔记" subtitle="语言是一道道格与时态的关 —— 一个个拆开。" posts={posts} />
+  <Subscribe />
+</BaseLayout>

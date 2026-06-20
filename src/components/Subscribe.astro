@@ -1,0 +1,19 @@
+---
+// 订阅条（深绿色），首页和文章页都用。目前是视觉占位，暂无后端。
+const { heading = '两周一封慢读信', text = '德语、故事、AI —— 想清楚后才寄出的一篇长文。' } = Astro.props;
+---
+
+<section class="subscribe">
+  <div class="glow"></div>
+  <div class="left">
+    <span class="ic">~</span>
+    <div>
+      <div class="h">{heading}</div>
+      <div class="p">{text}</div>
+    </div>
+  </div>
+  <div class="form">
+    <span class="ph">输入你的邮箱</span>
+    <span class="go">订阅</span>
+  </div>
+</section>
