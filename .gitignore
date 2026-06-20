@@ -22,3 +22,6 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# 设计稿解包/参考的本地缓存（不进仓库）
+.design-ref/
