@@ -1,0 +1,16 @@
+{
+  "新文章开头（自动填今天日期）": {
+    "scope": "markdown",
+    "prefix": "post",
+    "body": [
+      "---",
+      "title: ${1:文章标题}",
+      "date: $CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE",
+      "summary: ${2:一句话摘要}",
+      "---",
+      "",
+      "$0"
+    ],
+    "description": "在 .md 里敲 post 回车，自动生成文章开头，日期填今天"
+  }
+}

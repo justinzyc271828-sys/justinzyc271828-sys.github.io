@@ -8,7 +8,7 @@ import { glob } from 'astro/loaders';
 // 三个专柜共用同一张「登记表」：每篇必须有 title / date，summary 可选。
 const baseSchema = z.object({
   title: z.string(),
-  date: z.coerce.date(),
+  date: z.coerce.date().default(() => new Date()),  // 不写日期就自动用今天
   summary: z.string().optional(),
 });
 

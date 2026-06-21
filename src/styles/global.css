@@ -256,11 +256,14 @@ img { max-width:100%; }
 .related-card .m { font-family:var(--mono); font-size:11px; color:var(--muted2); margin-top:18px; }
 
 /* =================== 文章正文（Markdown 渲染） =================== */
-.prose { counter-reset:h2; margin-top:30px; }
+.prose { margin-top:30px; position:relative; padding-left:30px; }
+/* 左侧贯穿正文的点状「藤蔓」 */
+.prose::before { content:""; position:absolute; left:6px; top:14px; bottom:14px; width:2px; background:repeating-linear-gradient(#bcd1a0 0 5px, transparent 5px 12px); border-radius:2px; }
 .prose > p:first-of-type { font-family:var(--serif-cn); font-weight:300; font-size:21px; line-height:1.9; color:#3a3f31; text-wrap:pretty; }
 .prose p { font-family:var(--serif-cn); font-weight:300; font-size:18px; line-height:1.95; color:#3a3f31; margin:0 0 20px; text-wrap:pretty; }
-.prose h2 { counter-increment:h2; font-family:var(--serif); font-weight:600; font-size:28px; line-height:1.4; color:var(--ink); margin:48px 0 18px; display:flex; align-items:baseline; gap:14px; scroll-margin-top:30px; }
-.prose h2::before { content:counter(h2,decimal-leading-zero); font-family:var(--mono); font-size:14px; color:var(--green-soft); font-weight:500; }
+.prose h2 { position:relative; font-family:var(--serif); font-weight:600; font-size:28px; line-height:1.4; color:var(--ink); margin:56px 0 18px; scroll-margin-top:36px; }
+/* 每个小标题 = 藤蔓上的一个发光绿色节点 */
+.prose h2::before { content:""; position:absolute; left:-30px; top:0.72em; transform:translateY(-50%); width:14px; height:14px; border-radius:50%; background:radial-gradient(circle at 35% 35%, #b6e08a, #7cc068); box-shadow:0 0 0 5px var(--bg), 0 0 0 6px rgba(124,192,104,0.28), 0 0 14px rgba(124,192,104,0.6); }
 .prose h3 { font-family:var(--serif); font-weight:600; font-size:21px; color:var(--ink); margin:32px 0 14px; }
 .prose a { color:var(--green-dark); border-bottom:1px solid rgba(124,192,104,0.5); }
 .prose strong { font-weight:600; color:var(--ink); }
