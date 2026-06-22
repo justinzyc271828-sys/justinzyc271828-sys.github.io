@@ -1,5 +1,6 @@
 ---
 // 多栏页脚（首页那种精致版），全站通用。
+import BrandMark from './BrandMark.astro';
 ---
 
 <footer class="footer">
@@ -12,7 +13,7 @@
   <div class="footer-cols">
     <div class="footer-brand">
       <div class="row">
-        <span class="footer-badge">G</span>
+        <BrandMark class="footer-badge" />
         <span class="logo-name" style="font-size:18px;">Grenzgang</span>
       </div>
       <div class="tagline">一个人的三条写作线：语言、故事，与机器。慢一点，没关系。</div>
@@ -46,7 +47,7 @@
   </div>
 
   <div class="footer-bottom">
-    <span class="copy">© 2026 Grenzgang · 用 ☕ 与好奇G写成</span>
+    <span class="copy">© 2026 Grenzgang · 用 ☕ 与好奇心写成</span>
     <span class="footer-live"><span class="dot"></span>本站静默运行中</span>
   </div>
 </footer>

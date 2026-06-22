@@ -1,5 +1,6 @@
 ---
 // 顶部导航：logo + 胶囊导航。active 决定哪一项高亮。
+import BrandMark from './BrandMark.astro';
 const { active = '' } = Astro.props;
 const links = [
   { key: 'home', label: '首页', href: '/' },
@@ -12,7 +13,7 @@ const links = [
 
 <header class="site-nav">
   <a href="/" class="logo">
-    <span class="logo-badge">G</span>
+    <BrandMark class="logo-badge" />
     <span class="logo-name">Grenzgang</span>
     <span class="logo-sub">/ notes&amp;machine</span>
   </a>
