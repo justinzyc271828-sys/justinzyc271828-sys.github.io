@@ -4,7 +4,19 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import '../styles/global.css';
 
-const { title = 'Grenzgang', active = '' } = Astro.props;
+const {
+  title = 'Grenzgang',
+  active = '',
+  // 「描述」「分享图」做成带默认值的参数(prop):全站统一一套，
+  // 个别页面想要不同的，传进来覆盖即可——数据驱动、可扩展。
+  description = 'Grenzgang —— 边界行走。一个人的三条写作线：德语语法、小说写作，与 AI 使用体验。',
+  image = '/cave.jpg',
+} = Astro.props;
+
+// 社交平台是在「它自己的服务器」上来抓你的图和页面，必须给完整绝对网址，
+// 不能是 /cave.jpg 这种相对路径。Astro.site 来自 astro.config.mjs。
+const ogImage = new URL(image, Astro.site).href;
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
 ---
 
 <!doctype html>
@@ -13,6 +25,27 @@ const { title = 'Grenzgang', active = '' } = Astro.props;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- 给搜索引擎读的摘要 + 本页的「正规网址」 -->
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    <!-- Open Graph：发到微信 / Facebook 等平台时渲染成「标题+摘要+大图」卡片 -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Grenzgang" />
+    <meta property="og:locale" content="zh_CN" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="800" />
+
+    <!-- X / Twitter 的大图卡片 -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
