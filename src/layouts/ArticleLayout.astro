@@ -11,7 +11,7 @@ const mins = readingTime(post.body);
 const sectionName = { de: '德语语法笔记', fiction: '小说 / 写作', ai: 'AI 使用体验' }[sectionKey] || sectionKey;
 ---
 
-<BaseLayout title={post.data.title + ' · 心智边界'} active={sectionKey}>
+<BaseLayout title={post.data.title + ' · Grenzgang'} active={sectionKey}>
   <div class="read-grid">
 
     <aside class="toc">
@@ -35,7 +35,7 @@ const sectionName = { de: '德语语法笔记', fiction: '小说 / 写作', ai: 
       <h1 class="article-title">{post.data.title}</h1>
       {post.data.summary && <div class="article-sub">{post.data.summary}</div>}
       <div class="article-meta">
-        <span class="av">心</span>
+        <span class="av">G</span>
         <div style="flex:1;">
           <div class="who">主理人</div>
           <div class="sub">{ymd(post.data.date)} · {mins} MIN 阅读</div>
@@ -56,9 +56,9 @@ const sectionName = { de: '德语语法笔记', fiction: '小说 / 写作', ai: 
       <div class="eof"><span class="sq"></span><span class="rule"></span><span class="lbl">EOF</span></div>
 
       <div class="author-card">
-        <span class="av">心</span>
+        <span class="av">G</span>
         <div style="flex:1;">
-          <div class="n">心智边界 · 主理人</div>
+          <div class="n">Grenzgang · 主理人</div>
           <div class="b">在柏林学德语、写小说、和机器打交道。一个人的三条写作线。</div>
         </div>
       </div>
