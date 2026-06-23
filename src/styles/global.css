@@ -183,8 +183,10 @@ img { max-width:100%; }
 .subscribe .h { font-family:var(--serif); font-weight:600; font-size:19px; }
 .subscribe .p { font-size:13px; color:#b3c4a0; margin-top:3px; }
 .subscribe .form { position:relative; display:flex; align-items:center; gap:8px; background:rgba(255,255,255,0.08); border:1px solid rgba(200,235,160,0.28); border-radius:999px; padding:5px 5px 5px 20px; }
-.subscribe .form span.ph { font-size:13px; color:#9fb08c; }
-.subscribe .form .go { background:var(--green-bright); color:#22341a; font-size:13px; font-weight:500; padding:9px 22px; border-radius:999px; }
+.subscribe .form .email { width:180px; max-width:100%; background:transparent; border:none; outline:none; font-family:var(--sans); font-size:13px; color:var(--panel-text); }
+.subscribe .form .email::placeholder { color:#9fb08c; }
+.subscribe .form .go { background:var(--green-bright); color:#22341a; font-size:13px; font-weight:500; padding:9px 22px; border-radius:999px; border:none; cursor:pointer; font-family:var(--sans); white-space:nowrap; }
+.subscribe .form .go:hover { filter:brightness(1.05); }
 
 /* =================== 页脚 =================== */
 .footer { margin-top:56px; border-top:1px solid var(--line2); padding:34px 0 14px; }
