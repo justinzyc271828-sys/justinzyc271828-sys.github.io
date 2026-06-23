@@ -11,7 +11,7 @@ const mins = readingTime(post.body);
 const sectionName = { de: '德语语法笔记', fiction: '小说 / 写作', ai: 'AI 使用体验' }[sectionKey] || sectionKey;
 ---
 
-<BaseLayout title={post.data.title + ' · Grenzgang'} active={sectionKey}>
+<BaseLayout title={post.data.title + ' · Grenzgang'} description={post.data.summary} active={sectionKey}>
   <div class="read-grid">
 
     <aside class="toc">

@@ -29,6 +29,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
     <!-- 给搜索引擎读的摘要 + 本页的「正规网址」 -->
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
+    <link rel="alternate" type="application/rss+xml" title="Grenzgang" href="/rss.xml" />
 
     <!-- Open Graph：发到微信 / Facebook 等平台时渲染成「标题+摘要+大图」卡片 -->
     <meta property="og:type" content="website" />

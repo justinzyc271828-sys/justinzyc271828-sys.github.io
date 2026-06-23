@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://justinzyc271828-sys.github.io/sitemap-index.xml

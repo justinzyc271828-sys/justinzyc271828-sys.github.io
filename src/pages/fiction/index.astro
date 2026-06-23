@@ -6,7 +6,7 @@ import Subscribe from '../../components/Subscribe.astro';
 const posts = await getCollection('fiction');
 ---
 
-<BaseLayout title="小说 / 写作 · Grenzgang" active="fiction">
+<BaseLayout title="小说 / 写作 · Grenzgang" description="半成品、废稿与偶尔成形的短篇，都留在这里。" active="fiction">
   <SectionArchive sectionKey="fiction" title="小说 / 写作" subtitle="半成品、废稿与偶尔成形的短篇，都留在这里。" posts={posts} />
   <Subscribe />
 </BaseLayout>
