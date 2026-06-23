@@ -24,6 +24,8 @@ export async function GET(context) {
     description: 'Grenzgang —— 边界行走。德语语法、小说写作，与 AI 使用体验。',
     site: context.site,
     items,
+    // 给订阅源套一张「皮」：阅读器照常解析，浏览器里打开则按这张样式表渲染成说明页。
+    stylesheet: '/rss-style.xsl',
     customData: `<language>zh-CN</language>`,
   });
 }
