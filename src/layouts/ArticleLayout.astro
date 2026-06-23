@@ -2,6 +2,7 @@
 // 阅读页：左侧目录(带阅读进度) + 正文 + 推荐 + 订阅。正文由各文章页通过 <slot/> 传入。
 import BaseLayout from './BaseLayout.astro';
 import Subscribe from '../components/Subscribe.astro';
+import BrandMark from '../components/BrandMark.astro';
 import { theme, readingTime, ymd } from '../lib/themes.js';
 
 const { post, headings = [], related = [], sectionKey } = Astro.props;
@@ -35,9 +36,9 @@ const sectionName = { de: '德语语法笔记', fiction: '小说 / 写作', ai: 
       <h1 class="article-title">{post.data.title}</h1>
       {post.data.summary && <div class="article-sub">{post.data.summary}</div>}
       <div class="article-meta">
-        <span class="av">G</span>
+        <BrandMark class="av-mark" />
         <div style="flex:1;">
-          <div class="who">主理人</div>
+          <div class="who">Justin</div>
           <div class="sub">{ymd(post.data.date)} · {mins} MIN 阅读</div>
         </div>
       </div>
@@ -56,9 +57,9 @@ const sectionName = { de: '德语语法笔记', fiction: '小说 / 写作', ai: 
       <div class="eof"><span class="sq"></span><span class="rule"></span><span class="lbl">EOF</span></div>
 
       <div class="author-card">
-        <span class="av">G</span>
+        <BrandMark class="av-mark av-mark-lg" />
         <div style="flex:1;">
-          <div class="n">Grenzgang · 主理人</div>
+          <div class="n">Justin</div>
           <div class="b">在柏林学德语、写小说、和机器打交道。一个人的三条写作线。</div>
         </div>
       </div>
