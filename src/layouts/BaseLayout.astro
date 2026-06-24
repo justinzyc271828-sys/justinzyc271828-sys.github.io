@@ -24,6 +24,18 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- 主题:在页面绘制前定好深/浅，避免刷新时闪一下 -->
+    <script is:inline>
+      (function () {
+        try {
+          var t = localStorage.getItem('theme') ||
+            (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+          document.documentElement.setAttribute('data-theme', t);
+        } catch (e) {}
+      })();
+    </script>
+
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
     <!-- 给搜索引擎读的摘要 + 本页的「正规网址」 -->
