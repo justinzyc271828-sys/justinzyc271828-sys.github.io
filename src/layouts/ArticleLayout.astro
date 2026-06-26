@@ -60,23 +60,23 @@ const sectionName = { de: '德语语法笔记', fiction: '小说 / 写作', ai: 
         <nav class="chapter-nav">
           {prev ? (
             <a class="chap-link prev" href={`/${sectionKey}/${prev.id}`}>
-              <span class="dir">← 上一节 / PREV</span>
+              <span class="dir">← 上一章 / PREV</span>
               <span class="ct">{prev.data.title}</span>
             </a>
           ) : (
             <span class="chap-link prev disabled">
-              <span class="dir">← 上一节 / PREV</span>
+              <span class="dir">← 上一章 / PREV</span>
               <span class="ct">已是开篇</span>
             </span>
           )}
           {next ? (
             <a class="chap-link next" href={`/${sectionKey}/${next.id}`}>
-              <span class="dir">下一节 / NEXT →</span>
+              <span class="dir">下一章 / NEXT →</span>
               <span class="ct">{next.data.title}</span>
             </a>
           ) : (
             <span class="chap-link next disabled">
-              <span class="dir">下一节 / NEXT →</span>
+              <span class="dir">下一章 / NEXT →</span>
               <span class="ct">连载中 · 敬请期待</span>
             </span>
           )}
