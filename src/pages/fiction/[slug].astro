@@ -10,6 +10,15 @@ export async function getStaticPaths() {
 const { post } = Astro.props;
 const { Content, headings } = await render(post);
 
+// 连载导航：同一 series 内按 order 排序，取当前篇的前一篇 / 后一篇。
+const seriesPosts = (await getCollection('fiction'))
+  .filter((p) => post.data.series && p.data.series === post.data.series)
+  .sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0));
+const seriesIdx = seriesPosts.findIndex((p) => p.id === post.id);
+const prev = seriesIdx > 0 ? seriesPosts[seriesIdx - 1] : null;
+const next = seriesIdx >= 0 && seriesIdx < seriesPosts.length - 1 ? seriesPosts[seriesIdx + 1] : null;
+const seriesNav = !!post.data.series;
+
 const related = [
   ...(await getCollection('ai')),
   ...(await getCollection('de')),
@@ -20,6 +29,6 @@ const related = [
   .slice(0, 3);
 ---
 
-<ArticleLayout post={post} headings={headings} related={related} sectionKey="fiction">
+<ArticleLayout post={post} headings={headings} related={related} sectionKey="fiction" prev={prev} next={next} seriesNav={seriesNav}>
   <Content />
 </ArticleLayout>

@@ -5,7 +5,7 @@ import Subscribe from '../components/Subscribe.astro';
 import BrandMark from '../components/BrandMark.astro';
 import { theme, readingTime, ymd } from '../lib/themes.js';
 
-const { post, headings = [], related = [], sectionKey } = Astro.props;
+const { post, headings = [], related = [], sectionKey, prev = null, next = null, seriesNav = false } = Astro.props;
 const t = theme(sectionKey);
 const toc = headings.filter((h) => h.depth === 2);
 const mins = readingTime(post.body);
@@ -50,17 +50,44 @@ const sectionName = { de: '德语语法笔记', fiction: '小说 / 写作', ai: 
         <span class="cap">FIG.01 / 封面占位</span>
       </div>
 
-      <div class="prose">
+      <div class="prose" data-section={sectionKey}>
         <slot />
       </div>
 
       <div class="eof"><span class="sq"></span><span class="rule"></span><span class="lbl">EOF</span></div>
 
+      {seriesNav && (
+        <nav class="chapter-nav">
+          {prev ? (
+            <a class="chap-link prev" href={`/${sectionKey}/${prev.id}`}>
+              <span class="dir">← 上一节 / PREV</span>
+              <span class="ct">{prev.data.title}</span>
+            </a>
+          ) : (
+            <span class="chap-link prev disabled">
+              <span class="dir">← 上一节 / PREV</span>
+              <span class="ct">已是开篇</span>
+            </span>
+          )}
+          {next ? (
+            <a class="chap-link next" href={`/${sectionKey}/${next.id}`}>
+              <span class="dir">下一节 / NEXT →</span>
+              <span class="ct">{next.data.title}</span>
+            </a>
+          ) : (
+            <span class="chap-link next disabled">
+              <span class="dir">下一节 / NEXT →</span>
+              <span class="ct">连载中 · 敬请期待</span>
+            </span>
+          )}
+        </nav>
+      )}
+
       <div class="author-card">
         <BrandMark class="av-mark av-mark-lg" />
         <div style="flex:1;">
           <div class="n">Justin</div>
-          <div class="b">在柏林学德语、写小说、和机器打交道。一个人的三条写作线。</div>
+          <div class="b">学德语、写小说、和机器打交道。一个人的三条写作线。</div>
         </div>
       </div>
     </article>

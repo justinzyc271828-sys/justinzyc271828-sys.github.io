@@ -10,6 +10,10 @@ const baseSchema = z.object({
   title: z.string(),
   date: z.coerce.date().default(() => new Date()),  // 不写日期就自动用今天
   summary: z.string().optional(),
+  // —— 连载用(可选)：同一 series 的文章按 order 串成「上一节 / 下一节」。
+  //    不写这两项的文章(如 AI / 德语)完全不受影响。
+  series: z.string().optional(),
+  order: z.number().optional(),
 });
 
 const ai = defineCollection({

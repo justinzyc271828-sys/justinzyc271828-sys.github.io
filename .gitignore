@@ -23,11 +23,15 @@ pnpm-debug.log*
 # jetbrains setting folder
 .idea/
 
+# vscode 编辑器设置（本机用，不进公开仓库）
+.vscode/
+
 # 设计稿解包/参考的本地缓存（不进仓库）
 .design-ref/
 
-# 本地一键发布脚本（只留本机，不进公开仓库）
+# 本地脚本（只留本机，不进公开仓库）
 发布.bat
+预览.bat
 
 # 内部文档（留本机给自己/学习助手看，不进公开仓库）
 技术总结.md

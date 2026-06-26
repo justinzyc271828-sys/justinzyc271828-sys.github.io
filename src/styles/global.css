@@ -272,12 +272,40 @@ img { max-width:100%; }
 .prose ul, .prose ol { font-family:var(--serif-cn); font-weight:300; font-size:18px; line-height:1.95; color:#3a3f31; padding-left:24px; margin:0 0 20px; }
 .prose li { margin:6px 0; }
 .prose blockquote { margin:34px 0; padding:6px 0 6px 28px; border-left:3px solid var(--green-soft); }
-.prose blockquote p { font-family:var(--serif); font-weight:500; font-style:italic; font-size:24px; line-height:1.5; color:#3a4a2c; }
+.prose blockquote p { font-family:var(--serif); font-weight:400; font-style:italic; font-size:16px; line-height:1.8; color:#3a4a2c; }
 .prose code { font-family:var(--mono); font-size:0.88em; background:#f0f3ea; border:1px solid #e2e7d8; border-radius:5px; padding:1px 6px; color:#3f7e70; }
 .prose pre { background:#26331f; color:#e7f2d8; border-radius:14px; padding:18px 20px; overflow:auto; margin:24px 0; }
 .prose pre code { background:none; border:none; padding:0; color:inherit; }
 .prose img { border-radius:14px; margin:24px 0; }
 .prose hr { border:none; height:1px; background:repeating-linear-gradient(90deg,#cdd4bd 0 5px, transparent 5px 11px); margin:36px 0; }
+
+/* 表格（Markdown 渲染）：列有最小宽度不被压扁；表过宽则在表内横向滚动，而非把行挤成瘦长条 */
+.prose table { display:block; overflow-x:auto; border-collapse:collapse; margin:28px 0; font-family:var(--sans); font-size:13.5px; line-height:1.65; }
+.prose th, .prose td { border:1px solid var(--line2); padding:8px 12px; text-align:left; vertical-align:top; min-width:7.5em; }
+.prose td { color:var(--text); }
+.prose thead th { background:#eef3e2; color:var(--ink); font-weight:600; }
+.prose tbody tr:nth-child(even) td { background:rgba(95,112,70,0.045); }
+
+/* 图（figure / 内嵌 SVG / 图说） */
+.prose figure { margin:30px 0; text-align:center; }
+.prose figure svg { max-width:100%; height:auto; }
+.prose figcaption { font-family:var(--mono); font-size:11.5px; color:var(--muted2); margin-top:12px; letter-spacing:0.02em; }
+
+/* —— 小说专栏：正文字号略小、阅读更紧凑（只作用于 fiction，AI / 德语不变） —— */
+.prose[data-section="fiction"] > p:first-of-type { font-size:18px; line-height:1.9; }
+.prose[data-section="fiction"] p { font-size:16px; line-height:1.9; }
+.prose[data-section="fiction"] ul,
+.prose[data-section="fiction"] ol { font-size:16px; line-height:1.9; }
+
+/* —— 章节导航（上一节 / 下一节）：连载专用 —— */
+.chapter-nav { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:40px; }
+.chap-link { display:flex; flex-direction:column; gap:9px; background:var(--paper); border:1px solid var(--line); border-radius:16px; padding:18px 22px; box-shadow:0 6px 22px rgba(80,100,60,0.05); transition:transform .18s, border-color .18s; }
+.chap-link.next { text-align:right; align-items:flex-end; }
+.chap-link:not(.disabled):hover { transform:translateY(-2px); border-color:var(--green-soft); }
+.chap-link .dir { font-family:var(--mono); font-size:11px; letter-spacing:0.08em; color:var(--green-dark); }
+.chap-link .ct { font-family:var(--serif); font-weight:600; font-size:18px; line-height:1.4; color:var(--ink); }
+.chap-link.disabled { opacity:0.5; cursor:default; box-shadow:none; }
+.chap-link.disabled .ct { font-family:'Spectral',serif; font-style:italic; font-weight:400; color:var(--muted); }
 
 /* =================== 响应式（手机/平板） =================== */
 @media (max-width: 1080px) {
@@ -298,6 +326,8 @@ img { max-width:100%; }
   .footer-cols { grid-template-columns:1fr 1fr; }
   .archive-row { grid-template-columns:1fr; gap:8px; }
   .archive-row .min { text-align:left; }
+  .chapter-nav { grid-template-columns:1fr; }
+  .chap-link.next { text-align:left; align-items:flex-start; }
   .subscribe { flex-direction:column; align-items:flex-start; }
   .nav-pills { gap:2px; padding:5px; }
   .nav-pill { padding:7px 11px; }
@@ -351,7 +381,15 @@ body { transition: background-color .3s ease, color .3s ease; }
 
 :root[data-theme="dark"] .prose code { background:#20281c; border-color:#374030; color:#8fd0b6; }
 
+/* 表格(暗色):表头深底、斑马纹提一点可见度(边框/文字已走变量自动适配) */
+:root[data-theme="dark"] .prose thead th { background:#2b3622; }
+:root[data-theme="dark"] .prose tbody tr:nth-child(even) td { background:rgba(150,180,110,0.05); }
+/* 图片(暗色):略压亮度护眼(未来真图片也适用) */
+:root[data-theme="dark"] .prose img { filter:brightness(0.9); }
+
 :root[data-theme="dark"] .archive-row:hover { background:#222a1c; }
+/* 章节导航(暗色)：方向标的绿色在深底上提亮(--green-dark 太暗) */
+:root[data-theme="dark"] .chap-link .dir { color:#9ed27f; }
 
 :root[data-theme="dark"] .page-head,
 :root[data-theme="dark"] .article-meta,
