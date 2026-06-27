@@ -291,11 +291,54 @@ img { max-width:100%; }
 .prose figure svg { max-width:100%; height:auto; }
 .prose figcaption { font-family:var(--mono); font-size:11.5px; color:var(--muted2); margin-top:12px; letter-spacing:0.02em; }
 
-/* —— 小说专栏：正文字号略小、阅读更紧凑（只作用于 fiction，AI / 德语不变） —— */
-.prose[data-section="fiction"] > p:first-of-type { font-size:18px; line-height:1.9; }
-.prose[data-section="fiction"] p { font-size:16px; line-height:1.9; }
-.prose[data-section="fiction"] ul,
-.prose[data-section="fiction"] ol { font-size:16px; line-height:1.9; }
+/* ============================================================
+   小说沉浸版式（卷轴 / 绘本感）—— 只作用于 fiction，AI / 德语不动
+   ============================================================ */
+/* 单栏居中、隐藏左侧目录 */
+.read-grid[data-section="fiction"] { grid-template-columns:minmax(0,900px); justify-content:center; gap:0; }
+.read-grid[data-section="fiction"] .toc { display:none; }
+
+/* 正文栏：羊皮纸底，像一卷摊开的书 */
+.read-grid[data-section="fiction"] article {
+  background:var(--paper); border:1px solid #e7e3d2; border-radius:6px;
+  padding:52px clamp(20px,5vw,56px) 60px; position:relative;
+  box-shadow:0 18px 50px rgba(70,84,52,0.09);
+}
+/* 卷轴式上下花边 */
+.read-grid[data-section="fiction"] article::before,
+.read-grid[data-section="fiction"] article::after {
+  content:""; position:absolute; left:clamp(20px,5vw,56px); right:clamp(20px,5vw,56px); height:3px;
+  background:repeating-linear-gradient(90deg,#cdb98a 0 5px, transparent 5px 11px); opacity:.45;
+}
+.read-grid[data-section="fiction"] article::before { top:22px; }
+.read-grid[data-section="fiction"] article::after  { bottom:24px; }
+
+/* 标题与正文：衬线、行距更松 */
+.read-grid[data-section="fiction"] .article-title { font-family:var(--serif); }
+.prose[data-section="fiction"] { font-family:var(--serif-cn); }
+.prose[data-section="fiction"] p { font-size:17px; line-height:2.02; margin:0 0 1.1em; }
+.prose[data-section="fiction"] strong { font-weight:700; color:var(--ink); }
+
+/* 段首下沉首字（每页开头一处） */
+.prose[data-section="fiction"] > p:first-of-type::first-letter {
+  float:left; font-family:var(--serif); font-weight:600; font-size:3.2em; line-height:.8;
+  margin:6px 12px 0 0; color:#b7a068;
+}
+
+/* 场景分隔（--- 换成居中花纹，替掉默认虚线） */
+.prose[data-section="fiction"] hr { border:none; height:auto; background:none; text-align:center; margin:36px 0; }
+.prose[data-section="fiction"] hr::before { content:"❦"; color:#b7a068; font-size:17px; }
+
+/* 封面插图（替代占位封面） */
+.article-cover { margin:30px 0 0; border-radius:10px; overflow:hidden; box-shadow:0 16px 40px rgba(60,84,52,0.16); }
+.article-cover img { display:block; width:100%; height:auto; }
+
+/* 内文插画与图说：图说衬线斜体，更有书卷气 */
+.prose[data-section="fiction"] figure { margin:34px 0; }
+.prose[data-section="fiction"] img { box-shadow:0 10px 30px rgba(60,84,52,0.14); }
+.prose[data-section="fiction"] figcaption {
+  font-family:var(--serif); font-style:italic; font-size:13.5px; color:var(--muted2); letter-spacing:0; margin-top:11px;
+}
 
 /* —— 章节导航（上一节 / 下一节）：连载专用 —— */
 .chapter-nav { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:40px; }

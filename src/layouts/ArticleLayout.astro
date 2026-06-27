@@ -13,7 +13,7 @@ const sectionName = { de: '德语语法笔记', fiction: '小说 / 写作', ai: 
 ---
 
 <BaseLayout title={post.data.title + ' · Grenzgang'} description={post.data.summary} active={sectionKey}>
-  <div class="read-grid">
+  <div class="read-grid" data-section={sectionKey}>
 
     <aside class="toc">
       <div class="toc-head"><span class="l">目录 / INDEX</span><span class="pct" id="read-pct">0%</span></div>
@@ -43,12 +43,18 @@ const sectionName = { de: '德语语法笔记', fiction: '小说 / 写作', ai: 
         </div>
       </div>
 
-      <div class="article-fig">
-        <div class="grid"></div>
-        <div class="glow"></div>
-        <span class="sprout"></span>
-        <span class="cap">FIG.01 / 封面占位</span>
-      </div>
+      {post.data.cover ? (
+        <figure class="article-cover">
+          <img src={post.data.cover} alt={post.data.title} />
+        </figure>
+      ) : sectionKey !== 'fiction' ? (
+        <div class="article-fig">
+          <div class="grid"></div>
+          <div class="glow"></div>
+          <span class="sprout"></span>
+          <span class="cap">FIG.01 / 封面占位</span>
+        </div>
+      ) : null}
 
       <div class="prose" data-section={sectionKey}>
         <slot />

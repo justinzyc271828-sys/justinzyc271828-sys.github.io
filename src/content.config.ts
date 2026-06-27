@@ -14,6 +14,8 @@ const baseSchema = z.object({
   //    不写这两项的文章(如 AI / 德语)完全不受影响。
   series: z.string().optional(),
   order: z.number().optional(),
+  // —— 封面插图(可选)：小说页用它替换默认的占位封面。
+  cover: z.string().optional(),
 });
 
 const ai = defineCollection({
