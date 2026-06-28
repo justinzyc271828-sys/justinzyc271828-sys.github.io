@@ -548,6 +548,11 @@ cover: /illustrations/justin-koln.jpg
 
 那位半阖着眼、对什么都提不起兴致的导师,此刻,猛地坐直了身子。他那双慵懒的眼睛睁开了,瞳孔骤然收缩,死死地盯住了贾斯汀。他两侧的考官也变了脸色,其中一个甚至下意识地按住了桌沿,像是要随时起身。
 
+<figure>
+<img src="/illustrations/scene-exam.jpg" alt="报名失控" loading="lazy" />
+<figcaption>「Ich heiße Justin.」名字一出口，满室烛火齐齐一矮——整座塔，看向了他。</figcaption>
+</figure>
+
 屋里死一般地静。只有那片被搅乱的吟诵声,还在慢慢地、慢慢地平复下去。
 
 贾斯汀僵在原地，手心全是汗。
