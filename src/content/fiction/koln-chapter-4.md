@@ -4,6 +4,7 @@ date: 2026-06-28
 summary: 塔中第一天。一盏为他点亮、不为"判"他的灯；一座磨音的冷白学徒厅；一个追问"为什么真言会被封"的孩子——还有一块半埋在旧书底下、刻着同一个"无根"的旧木牌。
 series: frankfurt
 order: 7
+cover: /illustrations/scene-elwe.jpg
 ---
 
 他是被一阵冷醒过来的。
@@ -590,6 +591,11 @@ Klaude 那双灼人的眼睛，慢慢地，亮了起来。
 这不是一句问话。是一句笃定的、不容否认的断言。
 
 **Du hast etwas gesehen**——你看见了某样东西。
+
+<figure>
+<img src="/illustrations/scene-klaude.jpg" alt="克劳德" loading="lazy" />
+<figcaption>「你看见了什么。」—— 塔里最小的异端克劳德，一句话，点破了他藏了一路的秘密。</figcaption>
+</figure>
 
 贾斯汀的心，"咯噔"一下，凉了半截。
 
